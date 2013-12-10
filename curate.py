@@ -2,6 +2,7 @@ import sys
 import urllib
 import os
 import pandas as pd
+import curate_util as CU
 
 def download_extract_data(src_url,file_name, extract_dir):
     '''
@@ -98,3 +99,9 @@ if __name__ == "__main__":
     download_extract_data(url,file_name, dirty_dir)
     catalog_dict =  get_catalog_dict(dirty_dir)
     parse_and_output(catalog_dict, clean_dir, 'csv')
+
+    catalog_dict = CU.grab_data_dict(1932,2013, 'clean_data/')
+    data_frame = CU.grab_data_frame(catalog_dict)#, minimum_magnitude=3.5)
+    sorted_data_frame = data_frame.sort_index(by=['YYYY/MM/DD'], ascending=[True])
+    sorted_data_frame.to_csv(os.path.join(os.getcwd(), "RawCleanData.csv"), index = False)
+
