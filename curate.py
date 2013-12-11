@@ -101,7 +101,7 @@ if __name__ == "__main__":
     parse_and_output(catalog_dict, clean_dir, 'csv')
 
     catalog_dict = CU.grab_data_dict(1932,2013, 'clean_data/')
-    data_frame = CU.grab_data_frame(catalog_dict, minimum_magnitude=3.5)
+    data_frame = CU.grab_data_frame(catalog_dict, minimum_magnitude=3)
     sorted_data_frame = data_frame.sort_index(by=['YYYY/MM/DD'], ascending=[True])
     sorted_data_frame.to_csv(os.path.join(os.getcwd(), "RawCleanData.csv"), index = False)
 
